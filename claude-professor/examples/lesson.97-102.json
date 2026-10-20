@@ -1,0 +1,256 @@
+{
+ "title": "Bivariate data: contingency tables and their plots",
+ "audience": "Explained for a student new to statistics",
+ "slides": [
+  {
+   "page": 97,
+   "title": "Association vs. Causal Relationship",
+   "syllabus": "Bivariate data",
+   "intro": "This slide is about one of the most important warnings in statistics. Two things moving together does not mean one is causing the other. We separate two ideas, causation and association, and then look at a famous example where the pattern is real but the explanation is silly.",
+   "html": "<ul class='s-list'><li data-e='caus'><b>Causation</b> = a direct cause – effect relationship between variables.<ul class='s-list'><li>Changes in one variable directly influence the other variable.</li></ul></li><li data-e='assoc'><b>Association</b> = a statistical relationship between variables<ul class='s-list'><li>The two variables tend to occur or vary together.</li></ul></li></ul><p data-e='warn' style='text-align:center;font-weight:550;margin:14px 0'>⚠ Association does not imply causation!</p><img data-e='fig' src='crop:97:0.37,0.52,0.63,0.91' style='display:block;margin:0 auto;max-width:340px;border-radius:6px'><p style='font-size:12px;color:var(--muted);text-align:center'>Source: Messerli, F.H. Chocolate Consumption, Cognitive Function, and Nobel Laureates. NEJM 367 (2012)</p>",
+   "notes": {
+    "caus": {
+     "title": "Causation",
+     "say": "Causation means one thing really makes the other happen. Flip the light switch and the light comes on. The switch is the cause and the light is the effect. If you change the first variable, the second one changes because of it, and that holds even when you control everything else.",
+     "extra": [
+      "<b>Test:</b> if I force the first variable to change, does the second one change as a result? If yes, that is causation."
+     ]
+    },
+    "assoc": {
+     "title": "Association",
+     "say": "Association is much weaker. It only says two variables tend to go up and down together in the data. It says nothing about why. Ice cream sales and sunburn cases both rise in summer, so they are associated. But eating ice cream does not give you sunburn.",
+     "extra": [
+      "Ice cream sales ↔ sunburn cases: <b>associated</b>, not causal. Both are driven by hot, sunny weather, a third variable called a <i>confounder</i>."
+     ]
+    },
+    "warn": {
+     "title": "The golden rule",
+     "say": "This is the sentence to remember. Association does not imply causation. When you spot a pattern in data, there are three possible explanations. The first variable causes the second, the second causes the first, or something else drives both. To really prove a cause you usually need a controlled experiment, not just observation.",
+     "exam_tip": "In an exam, if a question shows a correlation and asks whether one thing causes the other, the safe answer names a possible confounder or says that correlation alone cannot show causation."
+    },
+    "fig": {
+     "title": "The chocolate and Nobel prize chart",
+     "say": "This chart plots chocolate eaten per person in each country against Nobel prizes won per head of population. The countries line up on a clear upward trend: more chocolate goes with more Nobel laureates. But nobody believes eating chocolate wins you a Nobel prize. More likely, wealthy countries with strong universities both eat more chocolate and fund more research. It is the textbook example of a strong association with no direct cause."
+    }
+   },
+   "steps": [
+    "caus",
+    "assoc",
+    "warn",
+    "fig"
+   ]
+  },
+  {
+   "page": 98,
+   "title": "9.1 Bivariate Qualitative Attributes",
+   "syllabus": "Bivariate data",
+   "intro": "Until now we looked at one variable at a time. This slide sets up the notation for two categorical variables together, for example hair colour and eye colour. We count how often each pair of categories occurs, then turn those counts into proportions.",
+   "html": "<p data-e='setup'>Let \\(X\\) and \\(Y\\) be qualitative attributes with attribute domains \\(A=\\{a_1,\\dots,a_k\\}\\) and \\(B=\\{b_1,\\dots,b_\\ell\\}\\).</p><ul class='s-list' style='font-size:17px'><li data-e='abs'><b>absolute frequencies:</b> \\(n_{i,j}=|\\{m: x_m=a_i \\text{ and } y_m=b_j\\}|\\)<ul class='s-list'><li data-e='absrow'>row totals: \\(n_{i,+}=\\sum_{j=1}^{\\ell} n_{i,j}\\)</li><li data-e='abscol'>column totals: \\(n_{+,j}=\\sum_{i=1}^{k} n_{i,j}\\)</li><li data-e='abstot'>(overall) total: \\(n_{+,+}=\\sum_i\\sum_j n_{i,j}=n\\)</li></ul></li><li data-e='rel'><b>relative frequencies:</b> \\(f_{i,j}=\\dfrac{n_{i,j}}{n}\\)<ul class='s-list'><li data-e='relrow'>row totals: \\(f_{i,+}=\\sum_j f_{i,j}=\\dfrac{n_{i,+}}{n}\\) &nbsp; (marginal distribution of \\(X\\))</li><li data-e='relcol'>column totals: \\(f_{+,j}=\\sum_i f_{i,j}=\\dfrac{n_{+,j}}{n}\\) &nbsp; (marginal distribution of \\(Y\\))</li><li data-e='reltot'>(overall) sum: \\(f_{+,+}=1\\)</li></ul></li></ul>",
+   "notes": {
+    "setup": {
+     "title": "The setup",
+     "say": "We have two categorical variables, X and Y. X can take k different values, a one up to a k. Y can take l different values, b one up to b l. Picture X as hair colour with four categories, and Y as eye colour with four categories. Every person in the data gives us one pair, like black hair with brown eyes."
+    },
+    "abs": {
+     "title": "Absolute frequency n i j",
+     "say": "The number n i j counts how many observations have X equal to a i and, at the same time, Y equal to b j. The curly brackets are a set of observation numbers m, and the vertical bars mean count how many are in it. So n i j is simply the number of people in the cell in row i, column j.",
+     "extra": [
+      "Black hair and brown eyes: \\(n_{1,1}=68\\) people."
+     ]
+    },
+    "absrow": {
+     "title": "Row totals",
+     "say": "The plus sign in the second index means add up over that index. So n i plus is the sum across row i, adding every column. It tells you how many observations have X equal to a i, whatever Y is. That is just the ordinary count for X alone, from the one variable case.",
+     "extra": [
+      "All black-haired people: \\(68+20+15+5=108\\)."
+     ]
+    },
+    "abscol": {
+     "title": "Column totals",
+     "say": "In the same way, n plus j adds down column j over all the rows. It is how many observations have Y equal to b j, ignoring X.",
+     "extra": [
+      "All brown-eyed people: \\(68+119+26+7=220\\)."
+     ]
+    },
+    "abstot": {
+     "title": "Grand total",
+     "say": "If you add up all the row totals, or all the column totals, or every cell, you get the same number, the sample size n. It is a handy check on your arithmetic: both ways of adding must agree.",
+     "extra": [
+      "Here \\(n=592\\)."
+     ]
+    },
+    "rel": {
+     "title": "Relative frequency f i j",
+     "say": "A relative frequency is a count divided by the sample size n. So f i j is the fraction of all observations that fall in that cell. Fractions are easier to compare between data sets of different sizes.",
+     "extra": [
+      "\\(f_{1,1}=\\dfrac{68}{592}\\approx 0.115\\), about 11.5% of people."
+     ]
+    },
+    "relrow": {
+     "title": "Marginal distribution of X",
+     "say": "Adding the relative frequencies along a row gives f i plus, which is the proportion of observations with X equal to a i. Collected for all rows, these form the marginal distribution of X. Marginal just means it is written in the margin of the table, and it describes X by itself.",
+     "extra": [
+      "\\(f_{1,+}=\\dfrac{108}{592}\\approx0.182\\): 18.2% of people have black hair."
+     ]
+    },
+    "relcol": {
+     "title": "Marginal distribution of Y",
+     "say": "Likewise, adding down a column gives f plus j, the proportion of observations with Y equal to b j. These form the marginal distribution of Y, which describes eye colour on its own.",
+     "extra": [
+      "\\(f_{+,1}=\\dfrac{220}{592}\\approx0.372\\): 37.2% have brown eyes."
+     ]
+    },
+    "reltot": {
+     "title": "Everything sums to one",
+     "say": "All the proportions together must add up to exactly one, or one hundred percent. Every person falls in exactly one cell, so nothing is left over and nothing is counted twice."
+    }
+   },
+   "steps": [
+    "setup",
+    "abs",
+    "absrow",
+    "abscol",
+    "abstot",
+    "rel",
+    "relrow",
+    "relcol",
+    "reltot"
+   ]
+  },
+  {
+   "page": 99,
+   "title": "Contingency Table",
+   "syllabus": "Bivariate data",
+   "intro": "A contingency table is the standard way to display two categorical variables together. It is a grid of counts, with one variable down the side and the other across the top. Here we see the general shape, once with counts and once with proportions.",
+   "html": "<p data-e='def'>A <b>contingency table</b> or <b>cross tabulation</b> summarizes the absolute or relative frequencies for bivariate data:</p><div style='display:flex;gap:28px;flex-wrap:wrap;justify-content:center;margin-top:14px'><div data-e='tabn' style='padding:8px'><div style='text-align:center;font-size:14px;color:var(--muted)'>absolute frequencies</div><table class='s-table' style='font-size:15px;text-align:center'><tr><th></th><th>\\(b_1\\)</th><th>⋯</th><th>\\(b_\\ell\\)</th><th>Σ</th></tr><tr><td>\\(a_1\\)</td><td>\\(n_{1,1}\\)</td><td>⋯</td><td>\\(n_{1,\\ell}\\)</td><td>\\(n_{1,+}\\)</td></tr><tr><td>⋮</td><td>⋮</td><td>⋱</td><td>⋮</td><td>⋮</td></tr><tr><td>\\(a_k\\)</td><td>\\(n_{k,1}\\)</td><td>⋯</td><td>\\(n_{k,\\ell}\\)</td><td>\\(n_{k,+}\\)</td></tr><tr><td>Σ</td><td>\\(n_{+,1}\\)</td><td>⋯</td><td>\\(n_{+,\\ell}\\)</td><td><b>n</b></td></tr></table></div><div data-e='tabf' style='padding:8px'><div style='text-align:center;font-size:14px;color:var(--muted)'>relative frequencies</div><table class='s-table' style='font-size:15px;text-align:center'><tr><th></th><th>\\(b_1\\)</th><th>⋯</th><th>\\(b_\\ell\\)</th><th>Σ</th></tr><tr><td>\\(a_1\\)</td><td>\\(f_{1,1}\\)</td><td>⋯</td><td>\\(f_{1,\\ell}\\)</td><td>\\(f_{1,+}\\)</td></tr><tr><td>⋮</td><td>⋮</td><td>⋱</td><td>⋮</td><td>⋮</td></tr><tr><td>\\(a_k\\)</td><td>\\(f_{k,1}\\)</td><td>⋯</td><td>\\(f_{k,\\ell}\\)</td><td>\\(f_{k,+}\\)</td></tr><tr><td>Σ</td><td>\\(f_{+,1}\\)</td><td>⋯</td><td>\\(f_{+,\\ell}\\)</td><td><b>1</b></td></tr></table></div></div>",
+   "notes": {
+    "def": {
+     "title": "What a contingency table is",
+     "say": "A contingency table, also called a cross tabulation, is a grid that counts how often each combination of two categories occurs. One variable labels the rows and the other labels the columns. Each cell inside the grid answers a very simple question: how many observations have this row category and this column category together?"
+    },
+    "tabn": {
+     "title": "The table of absolute frequencies",
+     "say": "On the left, attribute X runs down the side with k categories, and attribute Y runs across the top with l categories. Each inner cell holds the count n i j. The last column, marked with the sigma sign, holds the row totals. The bottom row holds the column totals. And the dark corner cell at the bottom right is the grand total, n.",
+     "extra": [
+      "Inner cells: joint counts \\(n_{i,j}\\).",
+      "Right margin: \\(n_{i,+}\\). Bottom margin: \\(n_{+,j}\\). Corner: \\(n\\)."
+     ]
+    },
+    "tabf": {
+     "title": "The table of relative frequencies",
+     "say": "On the right is exactly the same table, but every count has been divided by n. So the cells hold proportions f i j, the margins hold the marginal distributions, and the corner cell is one, because all the proportions add up to one hundred percent."
+    }
+   },
+   "steps": [
+    "def",
+    "tabn",
+    "tabf"
+   ]
+  },
+  {
+   "page": 100,
+   "title": "Example: Contingency Table",
+   "syllabus": "Bivariate data",
+   "intro": "Now a real example. The HairEyeColor data set records the hair colour and eye colour of 592 people. We read the counts, and then the slide asks how to get the table of proportions.",
+   "html": "<p data-e='data' style='text-align:center'>Data set <code>HairEyeColor</code>: \\(X\\) = hair color, \\(Y\\) = eye color</p><div data-e='table' style='max-width:520px;margin:6px auto'><div style='text-align:center;color:var(--blue);font-size:16px'>Contingency table of absolute frequencies</div><table class='s-table' style='font-size:15px'><tr><th></th><th>brown</th><th>blue</th><th>hazel</th><th>green</th><th>Σ</th></tr><tr><td><b>black</b></td><td>68</td><td>20</td><td>15</td><td>5</td><td><b>108</b></td></tr><tr><td><b>brown</b></td><td>119</td><td>84</td><td>54</td><td>29</td><td><b>286</b></td></tr><tr><td><b>red</b></td><td>26</td><td>17</td><td>14</td><td>14</td><td><b>71</b></td></tr><tr><td><b>blond</b></td><td>7</td><td>94</td><td>10</td><td>16</td><td><b>127</b></td></tr><tr><td><b>Σ</b></td><td><b>220</b></td><td><b>215</b></td><td><b>93</b></td><td><b>64</b></td><td><b>592</b></td></tr></table></div><p data-e='q' style='margin-top:16px'><span style='color:var(--blue)'>Question:</span> <i>How do we obtain the corresponding table of relative frequencies?</i></p>",
+   "notes": {
+    "data": {
+     "title": "The data set",
+     "say": "HairEyeColor is a small data set that comes with the statistics language R. It describes 592 people by two categorical variables. X is hair colour, which is black, brown, red or blond. Y is eye colour, which is brown, blue, hazel or green."
+    },
+    "table": {
+     "title": "Reading the table",
+     "say": "Each cell is a count. For example, one hundred nineteen people have brown hair and brown eyes. The right-hand column gives the totals for each hair colour, and the bottom row gives the totals for each eye colour. Look at the blond row. Ninety-four of the one hundred twenty-seven blond people have blue eyes, so blond hair and blue eyes go together strongly. That kind of pattern is exactly what a contingency table helps you see.",
+     "extra": [
+      "Blond: \\(94/127\\approx 74\\%\\) have blue eyes. Overall only \\(215/592\\approx 36\\%\\) do."
+     ]
+    },
+    "q": {
+     "title": "Getting the relative frequencies",
+     "say": "The answer is simple. Divide every single cell by the sample size, five hundred ninety-two. That includes the totals. Each cell then tells you the fraction of all people in that group, and the grand total becomes one.",
+     "extra": [
+      "Every cell \\(\\div\\,592\\):",
+      "<table class='s-table' style='font-size:14px'><tr><th></th><th>brown</th><th>blue</th><th>hazel</th><th>green</th><th>Σ</th></tr><tr><td><b>black</b></td><td>0.115</td><td>0.034</td><td>0.025</td><td>0.008</td><td><b>0.182</b></td></tr><tr><td><b>brown</b></td><td>0.201</td><td>0.142</td><td>0.091</td><td>0.049</td><td><b>0.483</b></td></tr><tr><td><b>red</b></td><td>0.044</td><td>0.029</td><td>0.024</td><td>0.024</td><td><b>0.120</b></td></tr><tr><td><b>blond</b></td><td>0.012</td><td>0.159</td><td>0.017</td><td>0.027</td><td><b>0.215</b></td></tr><tr><td><b>Σ</b></td><td><b>0.372</b></td><td><b>0.363</b></td><td><b>0.157</b></td><td><b>0.108</b></td><td><b>1</b></td></tr></table>"
+     ]
+    }
+   },
+   "steps": [
+    "data",
+    "table",
+    "q"
+   ]
+  },
+  {
+   "page": 101,
+   "title": "Visualizations of Contingency Tables",
+   "syllabus": "Bivariate data",
+   "intro": "Numbers in a table are exact, but charts show patterns quickly. This slide shows the three standard ways to turn a contingency table into a bar chart. Each one makes a different comparison easy.",
+   "html": "<div style='display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;font-size:15px'><div data-e='grouped' style='padding:8px'><div style='text-align:center;color:var(--blue)'>Grouped bar chart</div><svg viewBox='0 0 440 250' style='width:100%;max-width:460px;display:block;margin:6px auto' font-family='system-ui' font-size='11'><rect x='70' y='8' width='10' height='10' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><text x='84' y='17' fill='currentColor'>black</text><rect x='150' y='8' width='10' height='10' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><text x='164' y='17' fill='currentColor'>brown</text><rect x='230' y='8' width='10' height='10' fill='#c0462b' stroke='#555' stroke-width='.5'/><text x='244' y='17' fill='currentColor'>red</text><rect x='310' y='8' width='10' height='10' fill='#e6c46a' stroke='#555' stroke-width='.5'/><text x='324' y='17' fill='currentColor'>blond</text><line x1='40' y1='30' x2='40' y2='216' stroke='currentColor'/><line x1='40' y1='216' x2='430' y2='216' stroke='currentColor'/><text x='36' y='220.0' text-anchor='end' fill='currentColor'>0</text><text x='36' y='173.5' text-anchor='end' fill='currentColor'>30</text><text x='36' y='127.0' text-anchor='end' fill='currentColor'>60</text><text x='36' y='80.5' text-anchor='end' fill='currentColor'>90</text><text x='36' y='34.0' text-anchor='end' fill='currentColor'>120</text><text x='88.0' y='232' text-anchor='middle' fill='currentColor'>brown</text><text x='185.5' y='232' text-anchor='middle' fill='currentColor'>blue</text><text x='283.0' y='232' text-anchor='middle' fill='currentColor'>hazel</text><text x='380.5' y='232' text-anchor='middle' fill='currentColor'>green</text><rect x='46.0' y='110.6' width='19' height='105.4' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='67.0' y='31.55000000000001' width='19' height='184.45' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='88.0' y='175.7' width='19' height='40.3' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='109.0' y='205.15' width='19' height='10.85' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='143.5' y='185.0' width='19' height='31.0' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='164.5' y='85.80000000000001' width='19' height='130.2' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='185.5' y='189.65' width='19' height='26.35' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='206.5' y='70.30000000000001' width='19' height='145.7' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='241.0' y='192.75' width='19' height='23.25' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='262.0' y='132.3' width='19' height='83.7' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='283.0' y='194.3' width='19' height='21.7' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='304.0' y='200.5' width='19' height='15.5' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='338.5' y='208.25' width='19' height='7.75' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='359.5' y='171.05' width='19' height='44.95' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='380.5' y='194.3' width='19' height='21.7' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='401.5' y='191.2' width='19' height='24.8' fill='#e6c46a' stroke='#555' stroke-width='.5'/></svg><div style='text-align:center;font-size:12px;color:var(--muted)'>eye colour · frequency</div></div><div data-e='stacked' style='padding:8px'><div style='text-align:center;color:var(--blue)'>Stacked bar chart</div><svg viewBox='0 0 440 250' style='width:100%;max-width:460px;display:block;margin:6px auto' font-family='system-ui' font-size='11'><rect x='70' y='8' width='10' height='10' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><text x='84' y='17' fill='currentColor'>black</text><rect x='150' y='8' width='10' height='10' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><text x='164' y='17' fill='currentColor'>brown</text><rect x='230' y='8' width='10' height='10' fill='#c0462b' stroke='#555' stroke-width='.5'/><text x='244' y='17' fill='currentColor'>red</text><rect x='310' y='8' width='10' height='10' fill='#e6c46a' stroke='#555' stroke-width='.5'/><text x='324' y='17' fill='currentColor'>blond</text><line x1='40' y1='30' x2='40' y2='216' stroke='currentColor'/><line x1='40' y1='216' x2='430' y2='216' stroke='currentColor'/><text x='36' y='220.0' text-anchor='end' fill='currentColor'>0</text><text x='36' y='173.5' text-anchor='end' fill='currentColor'>60</text><text x='36' y='127.0' text-anchor='end' fill='currentColor'>120</text><text x='36' y='80.5' text-anchor='end' fill='currentColor'>180</text><text x='36' y='34.0' text-anchor='end' fill='currentColor'>240</text><text x='88.0' y='232' text-anchor='middle' fill='currentColor'>brown</text><text x='185.5' y='232' text-anchor='middle' fill='currentColor'>blue</text><text x='283.0' y='232' text-anchor='middle' fill='currentColor'>hazel</text><text x='380.5' y='232' text-anchor='middle' fill='currentColor'>green</text><rect x='52.0' y='163.3' width='80' height='52.7' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='52.0' y='71.07500000000002' width='80' height='92.225' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='52.0' y='50.92500000000002' width='80' height='20.15' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='52.0' y='45.50000000000002' width='80' height='5.425' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='149.5' y='200.5' width='80' height='15.5' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='149.5' y='135.4' width='80' height='65.1' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='149.5' y='122.22500000000001' width='80' height='13.175' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='149.5' y='49.375000000000014' width='80' height='72.85' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='247.0' y='204.375' width='80' height='11.625' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='247.0' y='162.525' width='80' height='41.85' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='247.0' y='151.675' width='80' height='10.85' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='247.0' y='143.925' width='80' height='7.75' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='344.5' y='212.125' width='80' height='3.875' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='344.5' y='189.65' width='80' height='22.475' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='344.5' y='178.8' width='80' height='10.85' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='344.5' y='166.4' width='80' height='12.4' fill='#e6c46a' stroke='#555' stroke-width='.5'/></svg><div style='text-align:center;font-size:12px;color:var(--muted)'>eye colour · frequency</div></div><div data-e='segmented' style='padding:8px'><div style='text-align:center;color:var(--blue)'>Segmented bar chart</div><svg viewBox='0 0 440 250' style='width:100%;max-width:460px;display:block;margin:6px auto' font-family='system-ui' font-size='11'><rect x='70' y='8' width='10' height='10' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><text x='84' y='17' fill='currentColor'>black</text><rect x='150' y='8' width='10' height='10' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><text x='164' y='17' fill='currentColor'>brown</text><rect x='230' y='8' width='10' height='10' fill='#c0462b' stroke='#555' stroke-width='.5'/><text x='244' y='17' fill='currentColor'>red</text><rect x='310' y='8' width='10' height='10' fill='#e6c46a' stroke='#555' stroke-width='.5'/><text x='324' y='17' fill='currentColor'>blond</text><line x1='40' y1='30' x2='40' y2='216' stroke='currentColor'/><line x1='40' y1='216' x2='430' y2='216' stroke='currentColor'/><text x='36' y='220.0' text-anchor='end' fill='currentColor'>0</text><text x='36' y='173.5' text-anchor='end' fill='currentColor'>0.25</text><text x='36' y='127.0' text-anchor='end' fill='currentColor'>0.5</text><text x='36' y='80.5' text-anchor='end' fill='currentColor'>0.75</text><text x='36' y='34.0' text-anchor='end' fill='currentColor'>1</text><text x='88.0' y='232' text-anchor='middle' fill='currentColor'>brown</text><text x='185.5' y='232' text-anchor='middle' fill='currentColor'>blue</text><text x='283.0' y='232' text-anchor='middle' fill='currentColor'>hazel</text><text x='380.5' y='232' text-anchor='middle' fill='currentColor'>green</text><rect x='52.0' y='158.5090909090909' width='80' height='57.49090909090909' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='52.0' y='57.89999999999999' width='80' height='100.60909090909091' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='52.0' y='35.91818181818181' width='80' height='21.98181818181818' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='52.0' y='29.99999999999999' width='80' height='5.918181818181818' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='149.5' y='198.69767441860466' width='80' height='17.302325581395348' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='149.5' y='126.02790697674419' width='80' height='72.66976744186047' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='149.5' y='111.32093023255814' width='80' height='14.706976744186047' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='149.5' y='30.0' width='80' height='81.32093023255814' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='247.0' y='186.0' width='80' height='30.0' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='247.0' y='78.0' width='80' height='108.0' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='247.0' y='50.0' width='80' height='28.0' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='247.0' y='30.0' width='80' height='20.0' fill='#e6c46a' stroke='#555' stroke-width='.5'/><rect x='344.5' y='201.46875' width='80' height='14.53125' fill='#2b2b2b' stroke='#555' stroke-width='.5'/><rect x='344.5' y='117.1875' width='80' height='84.28125' fill='#8b5a2b' stroke='#555' stroke-width='.5'/><rect x='344.5' y='76.5' width='80' height='40.6875' fill='#c0462b' stroke='#555' stroke-width='.5'/><rect x='344.5' y='30.0' width='80' height='46.5' fill='#e6c46a' stroke='#555' stroke-width='.5'/></svg><div style='text-align:center;font-size:12px;color:var(--muted)'>eye colour · proportion</div></div></div>",
+   "notes": {
+    "grouped": {
+     "title": "Grouped bar chart",
+     "say": "In a grouped bar chart, each eye colour gets a cluster of bars, one bar per hair colour, side by side. This makes it easy to compare single cells of the table, such as how many blond people have blue eyes compared with brown-haired people. What it does not show well is the total for each eye colour.",
+     "extra": [
+      "Best for: comparing individual cell counts."
+     ]
+    },
+    "stacked": {
+     "title": "Stacked bar chart",
+     "say": "In a stacked bar chart, each eye colour gets one bar, and the bar is cut into pieces by hair colour. The total height is the total number of people with that eye colour, so you can compare totals easily. But only the bottom piece sits on a common baseline, so comparing the upper pieces between bars is harder.",
+     "extra": [
+      "Best for: seeing totals and a rough breakdown."
+     ]
+    },
+    "segmented": {
+     "title": "Segmented bar chart",
+     "say": "A segmented bar chart is a stacked chart where every bar is stretched to the same height, one hundred percent. Now the pieces show proportions: among people with each eye colour, what share has each hair colour. This is the best way to compare the make-up of groups of different sizes. The price you pay is that the actual group sizes are no longer visible.",
+     "extra": [
+      "Best for: comparing proportions between groups. Group sizes are hidden."
+     ]
+    }
+   },
+   "steps": [
+    "grouped",
+    "stacked",
+    "segmented"
+   ]
+  },
+  {
+   "page": 102,
+   "title": "Mosaic Plot",
+   "syllabus": "Bivariate data",
+   "intro": "A mosaic plot fixes the weakness of the segmented bar chart. It shows proportions and group sizes in the same picture, by using both the width and the height of each block.",
+   "html": "<ul class='s-list' style='font-size:18px'><li data-e='def'><b>Mosaic plots</b> visualize frequencies for bivariate samples and consist of segmented bars of varying width.</li><li data-e='width'>Bar <b>widths</b> are proportional to the frequency of one variable (<b>marginal frequency</b>).</li><li data-e='area'>Segment <b>areas</b> represent the <b>combined frequencies</b> of the two variables.</li></ul><div data-e='fig' style='padding:6px'><svg viewBox='0 0 440 270' style='width:100%;max-width:460px;display:block;margin:6px auto' font-family='system-ui' font-size='11'><rect x='40' y='24' width='69.32432432432432' height='125.92592592592592' fill='#7a4a21' stroke='#fff' stroke-width='1.5'/><rect x='40' y='149.92592592592592' width='69.32432432432432' height='37.03703703703704' fill='#4a86c5' stroke='#fff' stroke-width='1.5'/><rect x='40' y='186.96296296296296' width='69.32432432432432' height='27.77777777777778' fill='#a39246' stroke='#fff' stroke-width='1.5'/><rect x='40' y='214.74074074074073' width='69.32432432432432' height='9.25925925925926' fill='#4f9b5e' stroke='#fff' stroke-width='1.5'/><text x='74.66216216216216' y='240' text-anchor='middle' fill='currentColor'>black</text><rect x='109.32432432432432' y='24' width='183.5810810810811' height='83.21678321678321' fill='#7a4a21' stroke='#fff' stroke-width='1.5'/><rect x='109.32432432432432' y='107.21678321678321' width='183.5810810810811' height='58.74125874125874' fill='#4a86c5' stroke='#fff' stroke-width='1.5'/><rect x='109.32432432432432' y='165.95804195804195' width='183.5810810810811' height='37.76223776223776' fill='#a39246' stroke='#fff' stroke-width='1.5'/><rect x='109.32432432432432' y='203.7202797202797' width='183.5810810810811' height='20.27972027972028' fill='#4f9b5e' stroke='#fff' stroke-width='1.5'/><text x='201.11486486486487' y='240' text-anchor='middle' fill='currentColor'>brown</text><rect x='292.9054054054054' y='24' width='45.57432432432432' height='73.2394366197183' fill='#7a4a21' stroke='#fff' stroke-width='1.5'/><rect x='292.9054054054054' y='97.2394366197183' width='45.57432432432432' height='47.88732394366197' fill='#4a86c5' stroke='#fff' stroke-width='1.5'/><rect x='292.9054054054054' y='145.1267605633803' width='45.57432432432432' height='39.436619718309856' fill='#a39246' stroke='#fff' stroke-width='1.5'/><rect x='292.9054054054054' y='184.56338028169014' width='45.57432432432432' height='39.436619718309856' fill='#4f9b5e' stroke='#fff' stroke-width='1.5'/><text x='315.6925675675676' y='240' text-anchor='middle' fill='currentColor'>red</text><rect x='338.47972972972974' y='24' width='81.52027027027027' height='11.023622047244094' fill='#7a4a21' stroke='#fff' stroke-width='1.5'/><rect x='338.47972972972974' y='35.023622047244096' width='81.52027027027027' height='148.03149606299212' fill='#4a86c5' stroke='#fff' stroke-width='1.5'/><rect x='338.47972972972974' y='183.0551181102362' width='81.52027027027027' height='15.748031496062993' fill='#a39246' stroke='#fff' stroke-width='1.5'/><rect x='338.47972972972974' y='198.8031496062992' width='81.52027027027027' height='25.19685039370079' fill='#4f9b5e' stroke='#fff' stroke-width='1.5'/><text x='379.2398648648649' y='240' text-anchor='middle' fill='currentColor'>blond</text><rect x='70' y='4' width='10' height='10' fill='#7a4a21'/><text x='84' y='13' fill='currentColor'>brown eyes</text><rect x='150' y='4' width='10' height='10' fill='#4a86c5'/><text x='164' y='13' fill='currentColor'>blue eyes</text><rect x='230' y='4' width='10' height='10' fill='#a39246'/><text x='244' y='13' fill='currentColor'>hazel eyes</text><rect x='310' y='4' width='10' height='10' fill='#4f9b5e'/><text x='324' y='13' fill='currentColor'>green eyes</text><text x='230.0' y='258' text-anchor='middle' fill='currentColor'>hair colour (width = how many people)</text></svg></div>",
+   "notes": {
+    "def": {
+     "title": "What a mosaic plot is",
+     "say": "A mosaic plot is a segmented bar chart where the bars are allowed to have different widths. Instead of every bar being the same width, the width carries information too. That way one picture shows how big each group is and how it is made up."
+    },
+    "width": {
+     "title": "Widths: group sizes",
+     "say": "The width of each bar is proportional to how many observations are in that group, the marginal frequency of one variable. In the picture, the bar for brown hair is the widest, because brown hair is the most common, with two hundred eighty-six people. Red hair is the narrowest, with only seventy-one.",
+     "extra": [
+      "Brown: \\(286/592\\approx48\\%\\) of the total width. Red: \\(71/592\\approx12\\%\\)."
+     ]
+    },
+    "area": {
+     "title": "Areas: combined frequencies",
+     "say": "Inside each bar, the height of each segment is the proportion of that group with the other variable's category. A wide bar times a tall segment gives a big area. Since width is the share of people with that hair colour, and height is the share of those with that eye colour, the area of a block is exactly the share of everyone who has both. So bigger area means a more common combination.",
+     "extra": [
+      "Area of block = (share with this hair colour) × (share of those with this eye colour) = \\(f_{i,j}\\)."
+     ]
+    },
+    "fig": {
+     "title": "Reading this mosaic",
+     "say": "Here the hair colours run along the bottom and the eye colours fill each bar. In the blond bar, the blue segment takes up most of the height, which matches the table where ninety-four of one hundred twenty-seven blond people have blue eyes. In the brown hair bar, the brown eye segment is largest. You can see the association between hair and eye colour at a glance, together with how many people are in each group."
+    }
+   },
+   "steps": [
+    "def",
+    "width",
+    "area",
+    "fig"
+   ]
+  }
+ ]
+}

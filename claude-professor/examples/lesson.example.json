@@ -1,0 +1,115 @@
+{
+  "title": "Descriptive statistics: transformations and standardization",
+  "slides": [
+    {
+      "page": 89,
+      "title": "Effect of Transformations on Measures",
+      "intro": "This slide answers one question: if you change every data point in the same way, say by converting units, what happens to your summary numbers? Some measures follow the change exactly, and some do not move at all. Knowing which is which saves you from recomputing everything from scratch.",
+      "html": "<p data-e='q'><i>Question:</i> How are the measures affected by transformations applied to the observations?</p><ul class='s-list'><li data-e='mono'>Since <b>strictly monotone increasing transformations</b> preserve the order of the observations, the order statistics remain unchanged. Thus, the median and all quantiles are preserved up to the transformation.</li><li data-e='affine'>If an <b>affine linear transformation</b> \\(y = ax + b\\) is applied to all observations, the following relationships hold:</li></ul><table class='s-table'><tr><th>Measure</th><th>Transformation effect</th><th>Invariance</th></tr><tr data-e='mean'><td>arithmetic mean</td><td>\\(\\bar y = a\\bar x + b\\)</td><td>no invariances</td></tr><tr data-e='range'><td>range</td><td>\\(R_y = |a|\\cdot R_x\\)</td><td>invariant under translations</td></tr><tr data-e='var'><td>variance</td><td>\\(s_y^2 = a^2\\cdot s_x^2\\)</td><td>invariant under translations</td></tr><tr data-e='sd'><td>standard deviation</td><td>\\(s_y = |a|\\cdot s_x\\)</td><td>invariant under translations</td></tr></table>",
+      "notes": {
+        "q": {
+          "title": "The question",
+          "say": "Imagine you measured temperatures in Celsius and now convert all of them to Fahrenheit. Your mean, your spread, your median all have to be recomputed in principle. This slide shows you can skip that work, because each measure reacts to the conversion in a predictable way."
+        },
+        "mono": {
+          "title": "Monotone transformations",
+          "say": "A strictly monotone increasing transformation is any change that never flips the order of your numbers. Squaring positive values or taking a logarithm are examples. If a value was the third smallest before, it is still the third smallest afterwards. The median and the quantiles are defined only by position in the sorted list, so they survive. You just apply the same transformation to them. The median of the logs is the log of the median.",
+          "extra": [
+            "<b>Example:</b> data 1, 4, 9 has median 4. After taking the square root we get 1, 2, 3 and the median is 2, which is exactly \\(\\sqrt{4}\\)."
+          ]
+        },
+        "affine": {
+          "title": "Affine linear transformation",
+          "say": "Affine linear just means multiply by a number a, then add a number b. Changing Celsius to Fahrenheit is exactly this, with a equal to nine fifths and b equal to thirty two. The multiplication a stretches or shrinks the data, and the addition b slides everything left or right. The table below says how each summary measure responds to those two actions.",
+          "extra": [
+            "\\(F = \\tfrac{9}{5}C + 32\\), so \\(a=\\tfrac{9}{5}\\) and \\(b=32\\)."
+          ]
+        },
+        "mean": {
+          "title": "Mean: y bar equals a x bar plus b",
+          "say": "The mean moves with the data. If you stretch every value by a and shift by b, the average gets stretched and shifted in exactly the same way. That is why the table says no invariances: both the scaling and the shift change the mean.",
+          "extra": [
+            "Data 2, 4, 6 has \\(\\bar x = 4\\). With \\(y = 3x + 1\\): 7, 13, 19, so \\(\\bar y = 13 = 3\\cdot 4 + 1\\). ✓"
+          ]
+        },
+        "range": {
+          "title": "Range: absolute value of a times the range",
+          "say": "The range is the largest value minus the smallest. Shifting everything by b moves both ends equally, so the gap between them does not change. That is the invariance under translations. Stretching by a does change the gap, by the factor a. We use the absolute value because if a is negative the data is flipped, but the distance between the ends is still positive.",
+          "extra": [
+            "\\(R_y = \\max(ax+b) - \\min(ax+b) = |a|(\\max x - \\min x)\\). The \\(b\\) cancels."
+          ]
+        },
+        "var": {
+          "title": "Variance: a squared times the variance",
+          "say": "Variance measures how spread out the data is around its own mean. A shift moves the data and the mean together, so the distances from the mean stay the same and the variance is unchanged. A stretch by a multiplies every distance by a, and variance uses squared distances, so it picks up a factor of a squared. Notice the sign of a no longer matters at all.",
+          "extra": [
+            "\\(y_i-\\bar y = a(x_i-\\bar x)\\), so \\(s_y^2=\\frac{1}{n-1}\\sum a^2 (x_i-\\bar x)^2 = a^2 s_x^2\\)."
+          ]
+        },
+        "sd": {
+          "title": "Standard deviation: absolute value of a times s",
+          "say": "The standard deviation is the square root of the variance, so the factor a squared becomes the absolute value of a. This is the nice one for practice: it is in the same units as your data, and it scales by exactly the stretch factor. Double all your values and the standard deviation doubles. Add ten to all of them and it does not move."
+        }
+      },
+      "steps": [
+        "q",
+        "mono",
+        "affine",
+        "mean",
+        "range",
+        "var",
+        "sd"
+      ],
+      "syllabus": "Descriptive statistics"
+    },
+    {
+      "page": 90,
+      "title": "Standardization",
+      "intro": "Standardization is the most useful application of the previous slide. It rescales any data set so that its mean is zero and its variance is one. That makes values from completely different scales directly comparable.",
+      "html": "<ul class='s-list'><li data-e='def'>A sample of a metric attribute is called <b>standardized</b> if its mean equals 0 and its variance equals 1.</li><li data-e='how'>If \\(x = (x_1,\\dots,x_n)\\) is a metric sample with \\(s_x > 0\\), the <b>standardization</b>, \\((z_1,\\dots,z_n)\\), is defined by</li></ul><div class='s-formula' data-e='formula'>$$z_i := \\frac{x_i - \\bar x}{s_x}$$</div><ul class='s-list'><li data-e='check'>\\(\\bar z = 0\\) and \\(s_z^2 = 1 \\Rightarrow\\) z-values are in fact standardized</li><li data-e='inverse'>\\(x_i = \\bar x + s\\cdot z_i\\)<br>\\(\\Rightarrow\\) The standardization \\(z_i\\) expresses how many standard deviations an observation \\(x_i\\) is away from the sample mean.</li></ul>",
+      "notes": {
+        "def": {
+          "title": "What 'standardized' means",
+          "say": "A data set is standardized when its average is exactly zero and its variance is exactly one. Zero means the data is centered, with as many values pulled below the middle as above. One means the typical spread is one unit. Once two data sets are both standardized, you can compare them on equal terms, whatever their original units were."
+        },
+        "how": {
+          "title": "How to standardize",
+          "say": "Take a sample x one through n. We need its standard deviation s x to be bigger than zero, otherwise all values are identical and there is nothing to rescale. The result is a new list z one through z n, built by the formula underneath."
+        },
+        "formula": {
+          "title": "The z-score formula",
+          "say": "For each observation, do two things. First subtract the mean. That shifts the data so it is centered at zero. Second, divide by the standard deviation. That shrinks or stretches the spread to exactly one. In terms of the previous slide, this is an affine transformation with a equal to one over s x, and b equal to minus x bar over s x.",
+          "extra": [
+            "<b>Worked example.</b> Data 2, 4, 6: \\(\\bar x = 4\\), \\(s_x = 2\\).",
+            "\\(z = \\frac{2-4}{2}, \\frac{4-4}{2}, \\frac{6-4}{2} = -1,\\ 0,\\ 1\\).",
+            "The mean of z is 0 and the variance is 1. ✓"
+          ],
+          "exam_tip": "If a question gives you a mean and standard deviation, z = (x - mean) / sd is almost always the first step."
+        },
+        "check": {
+          "title": "Why it works",
+          "say": "We can prove the result really is standardized using the previous slide. The mean transforms as a times x bar plus b, which here gives zero. The standard deviation transforms as the absolute value of a times s x, which here gives one. So z has mean zero and variance one, exactly as claimed.",
+          "extra": [
+            "\\(\\bar z = a\\bar x + b = \\frac{\\bar x}{s_x}-\\frac{\\bar x}{s_x}=0\\) and \\(s_z = |a|\\,s_x = \\frac{1}{s_x}\\,s_x = 1\\)."
+          ]
+        },
+        "inverse": {
+          "title": "Reading a z-value",
+          "say": "You can undo standardization: the original value equals the mean plus the standard deviation times z. Read it the other way and you get the meaning of z. It tells you how many standard deviations the observation sits from the average. A z of two means two standard deviations above the mean. A z of minus one means one standard deviation below.",
+          "extra": [
+            "Exam mean 60, \\(s=10\\). A score of 80 has \\(z = \\frac{80-60}{10} = 2\\): two standard deviations above average."
+          ]
+        }
+      },
+      "steps": [
+        "def",
+        "how",
+        "formula",
+        "check",
+        "inverse"
+      ],
+      "syllabus": "Descriptive statistics"
+    }
+  ],
+  "audience": "Explained for a student new to statistics"
+}
